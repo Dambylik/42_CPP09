@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bit.cpp                                            :+:      :+:    :+:   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:52:31 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:06:48 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 BitcoinExchange::BitcoinExchange() : _database()
 {
 	if (DEBUG)
-		std::cout << LGREEN << "BitcoinExchange base constructor called." << RESET << std::endl;
+		std::cout << "BitcoinExchange base constructor called." << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src) : _database(src._database)
 {
 	if (DEBUG)
-		std::cout << ORANGE << "BitcoinExchange copy constructor called." << RESET << std::endl;
+		std::cout << "BitcoinExchange copy constructor called." << std::endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -34,7 +34,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const & src) : _database(src._d
 BitcoinExchange::~BitcoinExchange()
 {
 	if (DEBUG)
-		std::cout << LRED << "BitcoinExchange destructor called." << RESET << std::endl;
+		std::cout << "BitcoinExchange destructor called." << std::endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ BitcoinExchange::~BitcoinExchange()
 BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & rhs)
 {
 	if (DEBUG)
-		std::cout << LBLUE << "BitcoinExchange assignment operator called." << RESET << std::endl;
+		std::cout << "BitcoinExchange assignment operator called." << std::endl;
 
 	this->_database = rhs._database;
 	return *this;
