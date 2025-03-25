@@ -6,53 +6,37 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/25 18:06:48 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:15:34 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-// ----------------------------------------------------------------------------
-// ---------------------------------------------------------------- Constructor
-// ----------------------------------------------------------------------------
 
 BitcoinExchange::BitcoinExchange() : _database()
 {
-	if (DEBUG)
 		std::cout << "BitcoinExchange base constructor called." << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src) : _database(src._database)
 {
-	if (DEBUG)
 		std::cout << "BitcoinExchange copy constructor called." << std::endl;
 }
 
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Destructor
-// ----------------------------------------------------------------------------
 
 BitcoinExchange::~BitcoinExchange()
 {
-	if (DEBUG)
 		std::cout << "BitcoinExchange destructor called." << std::endl;
 }
 
-// ----------------------------------------------------------------------------
-// ------------------------------------------------------------------- Overload
-// ----------------------------------------------------------------------------
 
 BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & rhs)
 {
-	if (DEBUG)
 		std::cout << "BitcoinExchange assignment operator called." << std::endl;
 
 	this->_database = rhs._database;
 	return *this;
 }
 
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Exceptions
-// ----------------------------------------------------------------------------
 
 const char* ErrorException::what() const throw()
 {

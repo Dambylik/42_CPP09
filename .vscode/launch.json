@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "lldb brain",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/ex00/btc",
+            "args": ["input.txt"],
+            "preLaunchTask": "lldb re-compil",
+            "cwd": "${workspaceFolder}/ex00"
+        },
+    ]
+}

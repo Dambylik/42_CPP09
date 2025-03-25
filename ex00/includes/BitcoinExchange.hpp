@@ -6,16 +6,14 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:51:15 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:11:20 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BITCOINEXCHANGE_HPP
-# define BITCOINEXCHANGE_HPP
+#pragma once
 
 #include "Colors.hpp"
 #include "Exceptions.hpp"
-
 # include <cstdlib>
 # include <cstring>
 # include <fstream>
@@ -26,8 +24,7 @@
 # include <sstream>
 # include <vector>
 # include <utility>
-
- #include <cstdlib>
+#include <cstdlib>
 
 #define SUCCESS 0
 #define ERROR 1
@@ -40,10 +37,6 @@
 #define JUNE 6
 #define SEPTEMBER 9
 #define NOVEMBER 11
-
-#define DEBUG 0
-// #define DEBUG 1
-
 
 typedef std::map<std::string, double> map_t;
 
@@ -74,5 +67,3 @@ class BitcoinExchange
 };
 
 std::ostream & operator<<(std::ostream & lhs, BitcoinExchange const & rhs);
-
-#endif
