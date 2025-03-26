@@ -6,28 +6,30 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:59 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:54:00 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:44:53 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-int main(int ac , char **av){
-
-    if (ac != 2) {
-		std::cerr << "Error: Usage is ./btc <file>.\n";
-		return (ERROR);
-	}
-
-	BitcoinExchange btc;
-
+int main(int argc, char **argv) {
 	try {
-		btc.getDatabase();
-		btc.getInput(av[1]);
-		return (SUCCESS);
-	} catch(const std::exception& e) {
-		std::cerr << "Error: " << e.what() << '\n';
+		if (argc != 2)
+			throw std::logic_error(WRONGARG);
+		Bitcoin coin;
+		coin.isInputCorrect(argv); // Ensures the file has the correct extension (.csv or .txt).
+		coin.exchange(argv[1]);
 	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+	return (0);
+}
 
-	return (ERROR);
+void Bitcoin::printMap(const std::map<std::string, float>& dataBaseType) {
+    int i = 0;
+    for (std::map<std::string, float>::const_iterator it = dataBaseType.begin();
+         it != dataBaseType.end(); ++it) {
+        std::cout << i++ << ": " << it->first << " | " << it->second << std::endl;
+    }
 }
