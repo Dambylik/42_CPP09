@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:59 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/26 16:44:53 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:44:54 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int main(int argc, char **argv) {
 	try {
 		if (argc != 2)
-			throw std::logic_error(WRONGARG);
+			throw WrongArg();
 		Bitcoin coin;
 		coin.isInputCorrect(argv); // Ensures the file has the correct extension (.csv or .txt).
 		coin.exchange(argv[1]);
 	}
 	catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cout << FRED(e.what()) << std::endl;
 	}
 	return (0);
 }

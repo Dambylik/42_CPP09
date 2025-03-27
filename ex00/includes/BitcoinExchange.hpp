@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/26 18:32:03 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:41:38 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,13 @@
 #include <iostream>
 #include <map>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include <vector>
+#include <iomanip>
+#include <stdlib.h>
+#include "Exceptions.hpp"  
 
-#define INVALID "Error: bad input => "
-#define WRONGDAY "Error: The day is invalid."
-#define WRONGYEAR "Error: The year is invalid."
-#define WRONGMONTH "Error: The month is invalid."
-#define CSVFAIL "Error: csv database is corrupted."
-#define WRONGEXT "This program only runs with a .csv or .txt file."
-#define WRONGARG "This program only runs with 2 arguments."
-#define NODATA "We have backup right? Yes. Where? On the server..."
-#define TOOBIG "Error: too large a number."
-#define NOTPOS "Error: not a positive number."
-#define NODATAONDATE "Error: csv database has no information about this date."
 
 class Bitcoin {
 	
