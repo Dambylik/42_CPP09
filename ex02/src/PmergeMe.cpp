@@ -1,69 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MergeMe.cpp                                        :+:      :+:    :+:   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:57:40 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:57:32 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
-// ----------------------------------------------------------------------------
-// ---------------------------------------------------------------- Constructor
-// ----------------------------------------------------------------------------
-PMergeMe::PMergeMe() {
-    if (DEBUG)
-        std::cout << LGREEN << "PMergeMe base constructor called" << RESET << std::endl;
+PmergeMe::PmergeMe() {}
+
+PmergeMe::PmergeMe( PmergeMe const & src ) : _deque(src._deque), _vector(src._vector) {}
+
+PmergeMe::~PmergeMe() {}
+
+PmergeMe& PmergeMe::operator=( PmergeMe const & other ) {
+
+    this->_deque = other._deque;
+    this->_vector = other._vector;
+    return (*this);
 }
 
-PMergeMe::PMergeMe(PMergeMe const& rhs) : _deque(rhs._deque), _vector(rhs._vector) {
-    if (DEBUG)
-        std::cout << LGREEN << "PMergeMe args constructor called" << RESET << std::endl;
-}
-
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Destructor
-// ----------------------------------------------------------------------------
-PMergeMe::~PMergeMe() {
-    if (DEBUG)
-        std::cout << LRED << "PMergeMe base destructor called" << RESET << std::endl;
-}
-
-
-// ----------------------------------------------------------------------------
-// ------------------------------------------------------------------- Overload
-// ----------------------------------------------------------------------------
-PMergeMe& PMergeMe::operator=(PMergeMe const& rhs) {
-    if (DEBUG)
-        std::cout << ORANGE << "PMergeMe assignment operator called" << RESET << std::endl;
-
-    this->_deque = rhs._deque;
-    this->_vector = rhs._vector;
-    return *this;
-}
-
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Exceptions
-// ----------------------------------------------------------------------------
-const char* ErrorTimeException::what() const throw() {
-	return ("an error occured using gettimeoftheday()");
-}
-
-const char* WrongInputException::what() const throw() {
-	return ("please enter unsigned ints only");
-}
-
-
-// ----------------------------------------------------------------------------
 // -------------------------------------------------------------------- Methods
-// ----------------------------------------------------------------------------
-void PMergeMe::checkInput(int argc, char **argv) {
+
+void PmergeMe::checkInput( int argc, char **argv ) {
 
 	for (int i = 1; i < argc; i++) {
 
@@ -80,19 +44,19 @@ void PMergeMe::checkInput(int argc, char **argv) {
 	}
 }
 
-void PMergeMe::fillDeque(int argc, char **argv) {
+void PmergeMe::fillDeque(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
 		this->_deque.push_back(atoi(argv[i]));
 }
 
-void PMergeMe::fillVector(int argc, char **argv) {
+void PmergeMe::fillVector(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
 		this->_vector.push_back(atoi(argv[i]));
 }
 
-void PMergeMe::printBefore(void) {
+void PmergeMe::printBefore(void) {
 
 	std::cout << "\n" << "Before: ";
 
@@ -102,7 +66,7 @@ void PMergeMe::printBefore(void) {
 	std::cout << std::endl;
 }
 
-void PMergeMe::printAfter(void) {
+void PmergeMe::printAfter(void) {
 
 	std::cout << "\n" << "After: ";
 
@@ -112,7 +76,7 @@ void PMergeMe::printAfter(void) {
 	std::cout << std::endl;
 }
 
-deque_t	PMergeMe::cutAndSort(deque_t deque) {
+deque_t	PmergeMe::cutAndSort(deque_t deque) {
 
     //Initialization of two empty deque_t objects, dequeOne and dequeTwo:
     //These are used to hold the two halves of the original deque.
@@ -149,7 +113,7 @@ deque_t	PMergeMe::cutAndSort(deque_t deque) {
 	return (mergeSort(dequeOne,dequeTwo));
 }
 
-vector_t PMergeMe::cutAndSort(vector_t vector)
+vector_t PmergeMe::cutAndSort(vector_t vector)
 {
 	vector_t vectorOne;
 	vector_t vectorTwo;
@@ -169,7 +133,7 @@ vector_t PMergeMe::cutAndSort(vector_t vector)
 	return (mergeSort(vectorOne,vectorTwo));
 }
 
-deque_t	PMergeMe::mergeSort(deque_t dequeOne, deque_t dequeTwo) {
+deque_t	PmergeMe::mergeSort(deque_t dequeOne, deque_t dequeTwo) {
 
     //Initialization of dequeThree: This is an empty deque_t object that will eventually
     //contain the sorted elements from both dequeOne and dequeTwo.
@@ -217,7 +181,7 @@ deque_t	PMergeMe::mergeSort(deque_t dequeOne, deque_t dequeTwo) {
 	return (dequeThree);
 }
 
-vector_t PMergeMe::mergeSort(vector_t vectorOne, vector_t vectorTwo) {
+vector_t PmergeMe::mergeSort(vector_t vectorOne, vector_t vectorTwo) {
 
 	vector_t vectorThree;
 
@@ -270,7 +234,7 @@ double getTime(void) {
 	return (time);
 }
 
-void PMergeMe::printTime(int containerType, double time) {
+void PmergeMe::printTime(int containerType, double time) {
 
 	std::string container = "deque";
 
@@ -282,24 +246,20 @@ void PMergeMe::printTime(int containerType, double time) {
 }
 
 
-// ----------------------------------------------------------------------------
 // -------------------------------------------------------------------- Setters
-// ----------------------------------------------------------------------------
-void PMergeMe::setDeque(deque_t deque) {
+void PmergeMe::setDeque(deque_t deque) {
 	this->_deque = deque;
 }
 
-void PMergeMe::setVector(vector_t vector) {
+void PmergeMe::setVector(vector_t vector) {
 	this->_vector = vector;
 }
 
-// ----------------------------------------------------------------------------
 // -------------------------------------------------------------------- Getters
-// ----------------------------------------------------------------------------
-deque_t const&	PMergeMe::getDeque(void) const {
+deque_t const&	PmergeMe::getDeque(void) const {
 	return (this->_deque);
 }
 
-vector_t const& PMergeMe::getVector(void) const {
+vector_t const& PmergeMe::getVector(void) const {
 	return (this->_vector);
 }

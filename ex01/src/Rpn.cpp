@@ -6,80 +6,29 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/27 16:41:30 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:43:54 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
+#include "Rpn.hpp"
 
-// ----------------------------------------------------------------------------
-// ---------------------------------------------------------------- Constructor
-// ----------------------------------------------------------------------------
-RPN::RPN() : _result(0), _stack() {
-	if (DEBUG)
-		std::cout << LGREEN << "RPN default constructor called." << RESET << std::endl;
+RPN::RPN() : _result(0), _stack() {}
+
+RPN::RPN( RPN const & src ) : _result(src._result), _stack(src._stack) {}
+
+int const & RPN::getResult( void ) const { return (this->_result);}
+
+RPN & RPN::operator=(RPN const & other) {
+	
+	this->_result = other._result;
+	this->_stack = other._stack;
+	return (*this);
 }
+RPN::~RPN() {}
 
-RPN::RPN(RPN const & src) : _result(src._result), _stack(src._stack) {
-	if (DEBUG)
-		std::cout << LGREEN << "RPN copy constructor called." << RESET << std::endl;
-}
+//-------------------------------------------------------------------Methods
 
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Destructor
-// ----------------------------------------------------------------------------
-
-RPN::~RPN() {
-	if (DEBUG)
-		std::cout << LRED << "RPN destructor called." << RESET << std::endl;
-}
-
-// ----------------------------------------------------------------------------
-// --------------------------------------------------------------------- Getter
-// ----------------------------------------------------------------------------
-
-int const& RPN::getResult(void) const {
-	return (this->_result);
-}
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------- Exceptions
-// ----------------------------------------------------------------------------
-
-const char* DivisionByZeroException::what() const throw() {
-	return ("cannot divide by zero");
-}
-
-const char* NotEnoughNumbersException::what() const throw()  {
-	return ("not enough number on stack");
-}
-
-const char* TooMuchNumbersException::what() const throw() {
-	return ("too much numbers in expression");
-}
-
-const char* WrongInputException::what() const throw() {
-	return ("rpn takes number <10 nb signs +-*/%");
-}
-
-// ----------------------------------------------------------------------------
-// ------------------------------------------------------------------- Overload
-// ----------------------------------------------------------------------------
-RPN& RPN::operator=(RPN const& rhs) {
-	if (DEBUG)
-		std::cout << LBLUE << "RPN assignment operator called." << RESET << std::endl;
-
-	this->_result = rhs._result;
-	this->_stack = rhs._stack;
-
-	return *this;
-}
-
-// ----------------------------------------------------------------------------
-// -------------------------------------------------------------------- Methods
-// ----------------------------------------------------------------------------
-
-void RPN::doOperation(char op, int firstNb, int secondNb) {
+void RPN::doOperation( char op, int firstNb, int secondNb ) {
 
 	int result = 0;
 
@@ -102,7 +51,7 @@ void RPN::doOperation(char op, int firstNb, int secondNb) {
 	this->_stack.push(result);
 }
 
-bool RPN::isOperator(char c) {
+bool RPN::isOperator( char c ) {
 
 	if (c == '-' || c == '+' || c == '/' || c == '*')
 		return (true);
@@ -111,7 +60,7 @@ bool RPN::isOperator(char c) {
 }
 
 
-void RPN::readAndCalculate(std::string input) {
+void RPN::readAndCalculate( std::string input ) {
 
     //Loop through the input string: The function iterates over each character in the input string.
 	for (int i = 0; i < (int)input.size(); i++) {
@@ -159,7 +108,7 @@ void RPN::readAndCalculate(std::string input) {
 		throw TooMuchNumbersException();
 }
 
-void RPN::parseInput(std::string input) {
+void RPN::parseInput( std::string input ) {
 
     // loop through each character
 	for (int i = 0; i < (int)input.size(); i++) {

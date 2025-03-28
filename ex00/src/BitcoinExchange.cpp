@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/27 17:46:25 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:43:08 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,9 +250,8 @@ float Bitcoin::getExchangeRate(std::string date) {
     return it->second;
 }
 
-/*___________________________________________ SETTERS ___________________________________________*/
-
 void Bitcoin::setMonths() {
+    
 	months.insert(std::make_pair(1, 31));
 	months.insert(std::make_pair(2, 28));
 	months.insert(std::make_pair(3, 31));

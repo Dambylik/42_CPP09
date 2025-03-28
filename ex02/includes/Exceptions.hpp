@@ -6,37 +6,27 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:54:36 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:57:26 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXCEPTIONS_HPP
-#define EXCEPTIONS_HPP
+#pragma once
 
-#include <iostream>
+# include <iostream>
+# include <exception>
 
-class DivisionByZeroException : public std::exception 
+class ErrorTimeException : public std::exception 
 {
 	public:
-		virtual const char* what() const throw();
-};
-
-class TooMuchNumbersException : public std::exception 
-{
-	public:
-		virtual const char* what() const throw();
-};
-
-class NotEnoughNumbersException : public std::exception 
-{
-	public:
-		virtual const char* what() const throw();
+		virtual const char* what() const throw() {
+			return ("an error occured using gettimeoftheday()");
+		}
 };
 
 class WrongInputException : public std::exception 
 {
 	public:
-		virtual const char* what() const throw();
+		virtual const char* what() const throw() {
+			return ("please enter unsigned ints only");
+		}
 };
-
-#endif // !EXCEPTIONS_HPP

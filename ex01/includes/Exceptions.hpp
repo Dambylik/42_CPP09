@@ -6,26 +6,41 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/23 16:56:41 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:45:13 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXCEPTIONS_HPP
-#define EXCEPTIONS_HPP
+#pragma once
+#include <iostream>
 
-# include <iostream>
-# include <exception>
-
-class ErrorTimeException : public std::exception 
+class DivisionByZeroException : public std::exception 
 {
 	public:
-		virtual const char* what() const throw();
+		virtual const char* what() const throw() {
+			return ("cannot divide by zero");
+		}
+};
+
+class TooMuchNumbersException : public std::exception 
+{
+	public:
+		virtual const char* what() const throw() {
+			return ("too much numbers in expression");
+		}
+};
+
+class NotEnoughNumbersException : public std::exception 
+{
+	public:
+		virtual const char* what() const throw() {
+			return ("not enough number on stack");
+		}
 };
 
 class WrongInputException : public std::exception 
 {
 	public:
-		virtual const char* what() const throw();
+		virtual const char* what() const throw() {
+			return ("rpn takes number <10 nb signs +-*/%");
+		}
 };
-
-#endif // !EXCEPTIONS_HPP
