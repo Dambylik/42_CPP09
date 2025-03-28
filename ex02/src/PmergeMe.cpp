@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 12:57:32 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:56:41 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,48 @@ PmergeMe::PmergeMe( PmergeMe const & src ) : _deque(src._deque), _vector(src._ve
 
 PmergeMe::~PmergeMe() {}
 
-PmergeMe& PmergeMe::operator=( PmergeMe const & other ) {
+PmergeMe & PmergeMe::operator=( PmergeMe const & other ) {
 
     this->_deque = other._deque;
     this->_vector = other._vector;
     return (*this);
 }
 
+void PmergeMe::setDeque( deque_t deque ) { this->_deque = deque; }
+
+void PmergeMe::setVector( vector_t vector ) { this->_vector = vector; }
+
+deque_t const &	PmergeMe::getDeque( void ) const { return (this->_deque); }
+
+vector_t const & PmergeMe::getVector( void ) const { return (this->_vector); }
+
+
 // -------------------------------------------------------------------- Methods
+
 
 void PmergeMe::checkInput( int argc, char **argv ) {
 
-	for (int i = 1; i < argc; i++) {
+	for (int i = 1; i < argc; i++) { //Loops through each argument.
 
 		std::string input = argv[i];
 
 		for (int j = 0; j < (int)input.size(); j++) {
-			if (isdigit(input[j]) == 0)
+			if (isdigit(input[j]) == 0) // Checks if each character is a digit.
 				throw(WrongInputException());
 		}
 
-		double dbl = atof(argv[i]);
+		double dbl = atof(argv[i]); // Converts to double (atof) and ensures it's in range (0 <= num <= INT_MAX).
 		if (dbl < 0 || dbl > __INT_MAX__)
 			throw(WrongInputException());
 	}
 }
-
+// eads numbers into _deque.
 void PmergeMe::fillDeque(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
 		this->_deque.push_back(atoi(argv[i]));
 }
-
+// Reads numbers from arguments and pushes them into _vector.
 void PmergeMe::fillVector(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
@@ -76,6 +86,7 @@ void PmergeMe::printAfter(void) {
 	std::cout << std::endl;
 }
 
+// Divide: Splits the array into two halves (cutAndSort()).
 deque_t	PmergeMe::cutAndSort(deque_t deque) {
 
     //Initialization of two empty deque_t objects, dequeOne and dequeTwo:
@@ -118,21 +129,22 @@ vector_t PmergeMe::cutAndSort(vector_t vector)
 	vector_t vectorOne;
 	vector_t vectorTwo;
 
-	if (vector.size() < 2)
+	if (vector.size() < 2) // Base case: If size < 2, return the vector (already sorted).
 		return (vector);
 
-	for (int i = 0; i < (int)(vector.size() / 2); i++)
+	for (int i = 0; i < (int)(vector.size() / 2); i++) // Splits vector into two halves (vectorOne and vectorTwo).
 		vectorOne.push_back(vector[i]);
 
 	for (int i = (int)(vector.size() / 2); i < (int)vector.size(); i++)
 		vectorTwo.push_back(vector[i]);
 
-	vectorOne = cutAndSort(vectorOne);
+	vectorOne = cutAndSort(vectorOne); // Recursively calls cutAndSort() on both halves.
 	vectorTwo = cutAndSort(vectorTwo);
 
-	return (mergeSort(vectorOne,vectorTwo));
+	return (mergeSort(vectorOne,vectorTwo)); // Merges sorted halves using mergeSort().
 }
 
+// Conquer: Recursively sorts both halves and merges them (mergeSort()).
 deque_t	PmergeMe::mergeSort(deque_t dequeOne, deque_t dequeTwo) {
 
     //Initialization of dequeThree: This is an empty deque_t object that will eventually
@@ -185,11 +197,11 @@ vector_t PmergeMe::mergeSort(vector_t vectorOne, vector_t vectorTwo) {
 
 	vector_t vectorThree;
 
-	while (vectorOne.empty() != true && vectorTwo.empty() != true) {
+	while (vectorOne.empty() != true && vectorTwo.empty() != true) { 
 
-		if (vectorOne[0] < vectorTwo[0]) {
-			vectorThree.push_back(vectorOne[0]);
-			vectorOne.erase(vectorOne.begin());
+		if (vectorOne[0] < vectorTwo[0]) { // Compares front elements of two sorted halves.
+			vectorThree.push_back(vectorOne[0]); // Pushes the smaller element into vectorThree.
+			vectorOne.erase(vectorOne.begin()); // Erases the used element.
 		}
 
 		else {
@@ -208,10 +220,10 @@ vector_t PmergeMe::mergeSort(vector_t vectorOne, vector_t vectorTwo) {
         vectorTwo.erase(vectorTwo.begin());
 	}
 
-	return (vectorThree);
+	return (vectorThree); // Appends any remaining elements (if one half is exhausted before the other).
 }
 
-double getTime(void) {
+double getTime(void) { // Uses gettimeofday() to get microsecond-precision timestamps.
 
 	struct timeval	tv;
 	double milisecondes;
@@ -231,7 +243,7 @@ double getTime(void) {
     // combining seconds && milisecondes
 	time = secondes + milisecondes;
 
-	return (time);
+	return (time); // Converts them into milliseconds for display.
 }
 
 void PmergeMe::printTime(int containerType, double time) {
@@ -245,21 +257,3 @@ void PmergeMe::printTime(int containerType, double time) {
 	std::cout << "Time to process elements with std::" << container << " : " << std::fixed << std::setprecision(4) << time << "ms.\n";
 }
 
-
-// -------------------------------------------------------------------- Setters
-void PmergeMe::setDeque(deque_t deque) {
-	this->_deque = deque;
-}
-
-void PmergeMe::setVector(vector_t vector) {
-	this->_vector = vector;
-}
-
-// -------------------------------------------------------------------- Getters
-deque_t const&	PmergeMe::getDeque(void) const {
-	return (this->_deque);
-}
-
-vector_t const& PmergeMe::getVector(void) const {
-	return (this->_vector);
-}

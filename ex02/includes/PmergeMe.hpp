@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 12:55:24 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:47:31 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #define ERROR 1
 #define DEQUE 0
 #define VECTOR 1
-
+//Two containers: _vector (vector) and _deque (deque).
 typedef std::vector<int> vector_t;
 typedef std::deque<int> deque_t;
 
