@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 12:43:54 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:12:53 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@ RPN::~RPN() {}
 
 //-------------------------------------------------------------------Methods
 
-void RPN::doOperation( char op, int firstNb, int secondNb ) {
+// Perform Calculation
+void RPN::performCalculation( char oper, int firstNb, int secondNb ) {
 
 	int result = 0;
 
-	if (op == '+')
+	if (oper == '+')
 		result = firstNb + secondNb;
 
-	else if (op == '-')
+	else if (oper == '-')
 		result = firstNb - secondNb;
 
-	else if (op == '*')
+	else if (oper == '*')
 		result = firstNb * secondNb;
 
-	else if (op == '/')
+	else if (oper == '/')
 	{
 		if (secondNb == 0)
 			throw(DivisionByZeroException());
@@ -59,8 +60,8 @@ bool RPN::isOperator( char c ) {
 	return (false);
 }
 
-
-void RPN::readAndCalculate( std::string input ) {
+// Processing RPN Expression
+void RPN::CalculateRpn( std::string input ) {
 
     //Loop through the input string: The function iterates over each character in the input string.
 	for (int i = 0; i < (int)input.size(); i++) {
@@ -90,8 +91,8 @@ void RPN::readAndCalculate( std::string input ) {
 			int firstNb = this->_stack.top();
 			this->_stack.pop();
 
-            //It calls doOperation, passing the operator and the two operands.
-			doOperation(input[i], firstNb, secondNb);
+            //It calls performCalculation, passing the operator and the two operands.
+			performCalculation(input[i], firstNb, secondNb);
 		}
 	}
 
@@ -108,20 +109,26 @@ void RPN::readAndCalculate( std::string input ) {
 		throw TooMuchNumbersException();
 }
 
+// Checks if the input is valid before processing.
 void RPN::parseInput( std::string input ) {
 
     // loop through each character
 	for (int i = 0; i < (int)input.size(); i++) {
 
-        // check for valid characters
+       //Ensures the character is a number, an operator, or a space.
+	//    If not, throws WrongInputException().
+	//    Check for missing space between digits
 		if (isdigit(input[i]) == 0 && isOperator(input[i]) == false && input[i] != ' ')
 			throw(WrongInputException());
 
         // check for digit followd directly by another character
+		// Prevents input like "34 +" (should be "3 4 +").
+		//Check for missing space between operators
 		if (isdigit(input[i]) != 0 && input[i + 1] && input[i + 1] != ' ')
 			throw(WrongInputException());
 
         // check for operator followd directly by another character
+		//Prevents "3 4+ " (should be "3 4 +").
 		if (isOperator(input[i]) && input[i + 1] && input[i + 1] != ' ')
 			throw(WrongInputException());
 	}
