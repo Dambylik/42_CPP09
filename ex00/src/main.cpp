@@ -5,31 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 16:52:59 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/27 17:44:54 by okapshai         ###   ########.fr       */
+/*   Created: 2025/03/30 19:09:31 by okapshai          #+#    #+#             */
+/*   Updated: 2025/03/30 20:16:36 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-int main(int argc, char **argv) {
-	try {
-		if (argc != 2)
-			throw WrongArg();
-		Bitcoin coin;
-		coin.isInputCorrect(argv); // Ensures the file has the correct extension (.csv or .txt).
-		coin.exchange(argv[1]);
-	}
-	catch (const std::exception& e) {
-		std::cout << FRED(e.what()) << std::endl;
-	}
-	return (0);
-}
-
-void Bitcoin::printMap(const std::map<std::string, float>& dataBaseType) {
-    int i = 0;
-    for (std::map<std::string, float>::const_iterator it = dataBaseType.begin();
-         it != dataBaseType.end(); ++it) {
-        std::cout << i++ << ": " << it->first << " | " << it->second << std::endl;
+int main( int argc, char **argv ) {
+    
+	if (argc != 2) {
+        std::cerr << FRED("Usage: ") << FRED(argv[0]) << FRED(" <input file>") << std::endl;
+        return (1);
     }
+
+    BitcoinExchange coin;
+
+    try {
+        coin.loadDatabase();
+        coin.processInputFile(argv[1]);
+    } 
+    catch (const std::exception & e) {
+        std::cerr <<  FRED(e.what()) << std::endl;
+        return (1);
+    }
+    return (0);
 }

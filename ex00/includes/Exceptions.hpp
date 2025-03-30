@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/27 17:28:24 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/30 20:56:15 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,43 @@
 #include "Colors.hpp"
 #include <iostream>
 
-class CsvFail : public std::exception 
+class CsvFailToOpen : public std::exception 
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("Error: csv database is corrupted.");
+			return ("Error: could not open csv database file.");
 		}
 };
 
-class WrongExtension : public std::exception 
+class InputFail : public std::exception 
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("This program only runs with a .csv or .txt file.");
+			return ("Error: input file is corrupted.");
 		}
 };
 
-class WrongArg : public std::exception 
-{
-	public:
-		virtual const char* what() const throw() {
-			return ("This program only runs with 2 arguments.");
-		}
-};
+// class WrongInputFile : public std::exception 
+// {
+// 	public:
+// 		virtual const char* what() const throw() {
+// 			return ("Error: Wrong input file");
+// 		}
+// };
+
+// class WrongArg : public std::exception 
+// {
+// 	public:
+// 		virtual const char* what() const throw() {
+// 			return ("This program only runs with 2 arguments.");
+// 		}
+// };
 
 class NoData : public std::exception 
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("You have a backup right? Just asking...");
+			return ("No valid entries found in database file");
 		}
 };
 
@@ -51,5 +59,29 @@ class InvalidHeader : public std::exception
 	public:
 		virtual const char* what() const throw() {
 			return ("Error: invalid file header.");
+		}
+};
+
+class DataError : public std::exception 
+{
+	public:
+		virtual const char* what() const throw() {
+			return (" <= Error: Invalid database format.");
+		}
+};
+
+class DateError : public std::exception 
+{
+	public:
+		virtual const char* what() const throw() {
+			return (" <= Error: Invalid date in database.");
+		}
+};
+
+class InvalidRate : public std::exception 
+{
+	public:
+		virtual const char* what() const throw() {
+			return (" <= Error: Invalid exchange rate.");
 		}
 };
