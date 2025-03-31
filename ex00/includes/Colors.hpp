@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 11:34:20 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/21 11:34:45 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:27:40 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define RESET "\033[0m"
 #define BLACK "\033[30m"
 #define RED "\033[31m"
+#define BOLDRED "\033[1;31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"

@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/30 20:56:15 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:45:06 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,13 @@ class CsvFailToOpen : public std::exception
 		}
 };
 
-class InputFail : public std::exception 
+class InputFailToOpen : public std::exception 
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("Error: input file is corrupted.");
+			return ("Error: could not open input file.");
 		}
 };
-
-// class WrongInputFile : public std::exception 
-// {
-// 	public:
-// 		virtual const char* what() const throw() {
-// 			return ("Error: Wrong input file");
-// 		}
-// };
-
-// class WrongArg : public std::exception 
-// {
-// 	public:
-// 		virtual const char* what() const throw() {
-// 			return ("This program only runs with 2 arguments.");
-// 		}
-// };
 
 class NoData : public std::exception 
 {
@@ -66,22 +50,7 @@ class DataError : public std::exception
 {
 	public:
 		virtual const char* what() const throw() {
-			return (" <= Error: Invalid database format.");
+			return ("Update data file.");
 		}
 };
 
-class DateError : public std::exception 
-{
-	public:
-		virtual const char* what() const throw() {
-			return (" <= Error: Invalid date in database.");
-		}
-};
-
-class InvalidRate : public std::exception 
-{
-	public:
-		virtual const char* what() const throw() {
-			return (" <= Error: Invalid exchange rate.");
-		}
-};
