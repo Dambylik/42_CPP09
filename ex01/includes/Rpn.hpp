@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 13:13:06 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:30:59 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ class RPN
 
 		void 			performCalculation( char oper, int firstNB, int secondNb );
 		bool 			isOperator( char c );
-		void 			parseInput( std::string input );
-		void 			CalculateRpn( std::string input );
+		void 			processInput( std::string input );
+		void 			calculateRpn( std::string input );
 
 	private:
 

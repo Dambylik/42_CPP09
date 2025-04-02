@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:59 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 13:15:14 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:37:05 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	main(int argc, char **argv) {
 		return (1);
 	}
 
+	RPN rpn;
+	
 	try {
-
-		RPN rpn;
-
-		rpn.parseInput(argv[1]); // Ensures the input contains only digits, spaces, and operators. 
-		rpn.CalculateRpn(argv[1]); // Reads the input and performs calculations using a stack.
+		rpn.processInput(argv[1]); // Ensures the input contains only digits, spaces, and operators. 
+		rpn.calculateRpn(argv[1]); // Reads the input and performs calculations using a stack.
 
 		std::cout << FGRN(rpn.getResult()) << std::endl; // Print the final result
 		return (0);
 	}
-	catch(const std::exception& e) {
+	catch( const std::exception & e ) {
 		std::cerr << FRED("Error: ") << FRED(e.what()) << '\n';
 	}
 	return (1);
 }
+

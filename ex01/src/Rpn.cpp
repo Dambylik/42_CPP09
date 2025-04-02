@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 13:12:53 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:32:53 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ RPN::RPN( RPN const & src ) : _result(src._result), _stack(src._stack) {}
 
 int const & RPN::getResult( void ) const { return (this->_result);}
 
-RPN & RPN::operator=(RPN const & other) {
+RPN & RPN::operator=( RPN const & other ) {
 	
 	this->_result = other._result;
 	this->_stack = other._stack;
@@ -61,7 +61,7 @@ bool RPN::isOperator( char c ) {
 }
 
 // Processing RPN Expression
-void RPN::CalculateRpn( std::string input ) {
+void RPN::calculateRpn( std::string input ) {
 
     //Loop through the input string: The function iterates over each character in the input string.
 	for (int i = 0; i < (int)input.size(); i++) {
@@ -110,7 +110,7 @@ void RPN::CalculateRpn( std::string input ) {
 }
 
 // Checks if the input is valid before processing.
-void RPN::parseInput( std::string input ) {
+void RPN::processInput( std::string input ) {
 
     // loop through each character
 	for (int i = 0; i < (int)input.size(); i++) {
