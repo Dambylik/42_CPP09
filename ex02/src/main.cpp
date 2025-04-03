@@ -6,14 +6,14 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:59 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 17:50:21 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:52:15 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "PmergeMe.hpp"
 
 // Your program implements the Merge-Insertion Sort (Ford-Johnson Algorithm) using 
-// both std::vector and std::deque containers. It takesa sequence of positive integers 
+// both std::vector and std::deque containers. It takes a sequence of positive integers 
 // as input, sorts them using merge-insertion sort, and measures the sorting time for each container.
 
 int	main(int argc, char **argv)
@@ -23,12 +23,14 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
+	PmergeMe PME;
+	
 	try {
-		PmergeMe PME;
-		PME.checkInput(argc, argv); // Calls checkInput() to ensure all arguments are valid positive integers.
 		
-		double startTime = getTime(); // Starts a timer
-		PME.fillVector(argc, argv); // Fills the vector with input values.
+		PME.checkInput(argc, argv);
+		
+		double startTime = getTime();
+		PME.fillVector(argc, argv);
 		PME.printBefore(); // Prints the sequence before sorting.
 		PME.setVector(PME.cutAndSort(PME.getVector())); // Sorts using cutAndSort() and sets the sorted vector.
 		PME.printAfter(); // Prints the sorted sequence.

@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 17:56:41 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:51:21 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ vector_t const & PmergeMe::getVector( void ) const { return (this->_vector); }
 
 void PmergeMe::checkInput( int argc, char **argv ) {
 
-	for (int i = 1; i < argc; i++) { //Loops through each argument.
+	for (int i = 1; i < argc; i++) {
 
 		std::string input = argv[i];
-
 		for (int j = 0; j < (int)input.size(); j++) {
-			if (isdigit(input[j]) == 0) // Checks if each character is a digit.
+			if (isdigit(input[j]) == 0)
 				throw(WrongInputException());
 		}
 
@@ -53,13 +52,13 @@ void PmergeMe::checkInput( int argc, char **argv ) {
 			throw(WrongInputException());
 	}
 }
-// eads numbers into _deque.
+
 void PmergeMe::fillDeque(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
 		this->_deque.push_back(atoi(argv[i]));
 }
-// Reads numbers from arguments and pushes them into _vector.
+
 void PmergeMe::fillVector(int argc, char **argv) {
 
 	for (int i = 1; i < argc; i++)
