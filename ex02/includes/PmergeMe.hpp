@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 17:47:31 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:13:00 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,32 @@ typedef std::deque<int> deque_t;
 class PmergeMe
 {
 	public:
-
 		PmergeMe();
-		PmergeMe( PmergeMe const & src );
-		PmergeMe &			operator=( PmergeMe const & other );
+		PmergeMe(PmergeMe const &src);
+		PmergeMe &operator=(PmergeMe const &other);
 		~PmergeMe();
 
-		deque_t const 		&getDeque( void ) const;
-		void				setDeque( deque_t deque );
+		void checkInput(int argc, char **argv);
+		void fillDeque(int argc, char **argv);
+		void fillVector(int argc, char **argv);
+		void printBefore(void);
+		void printAfter(void);
+		void printTime(int containerType, double time);
 
-		vector_t const 		&getVector( void ) const;
-		void				setVector( vector_t vector );
+		void setVector(vector_t vector);
+		void setDeque(deque_t deque);
+		vector_t const &getVector(void) const;
+		deque_t const &getDeque(void) const;
 
-		void				checkInput( int argc, char **argv );
-		void				fillDeque( int argc, char **argv );
-		void				fillVector( int argc, char **argv );
-		void				printBefore( void );
-		void				printAfter( void );
+		vector_t mergeInsertionSortVector(vector_t input);
+		void binaryInsertVector(vector_t sorted, int value);
 
-		void				printTime( int containerType, double time );
-
-		vector_t			cutAndSort( vector_t vector );
-		vector_t			mergeSort( vector_t vectorOne, vector_t vectorTwo );
-
-		deque_t				cutAndSort( deque_t deque );
-		deque_t				mergeSort( deque_t dequeOne, deque_t dequeTwo );
+		deque_t mergeInsertionSortDeque(deque_t input);
+		void binaryInsertDeque(deque_t sorted, int value);
 
 	private:
-
-		deque_t				_deque;
-		vector_t			_vector;
+		vector_t _vector;
+		deque_t _deque;
 };
 
-double	getTime(void);
+double getTime(void);
