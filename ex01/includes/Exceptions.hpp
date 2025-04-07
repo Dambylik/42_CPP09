@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 11:45:13 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:15:51 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ class WrongInputException : public std::exception
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("rpn takes number <10 nb signs +-*/%");
+			return ("rpn takes number <10 & signs +-*/%");
 		}
 };
