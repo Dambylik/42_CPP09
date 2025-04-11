@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olly <olly@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 12:39:50 by olly              #+#    #+#             */
+/*   Updated: 2025/04/11 13:02:26 by olly             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-test
+
 int main(int argc, char **argv)
 {
     if (argc < 2)
     {
         std::cerr << "Usage: ./PmergeMe <sequence of positive integers>" << std::endl;
-        return 1;
+        return (1);
     }
 
     PmergeMe sorter;
@@ -14,20 +25,16 @@ int main(int argc, char **argv)
     try
     {
         sorter.checkInput(argc, argv);
-
-        // Fill the containers before sorting
         sorter.fillVector(argc, argv);
         sorter.fillDeque(argc, argv);
-
-        // VECTOR sorting
         sorter.printBefore();
         double start = getTime();
+        
         vector_t sortedVec = sorter.mergeInsertionSortVector(sorter.getVector());
         sorter.setVector(sortedVec);
         sorter.printAfter();
         sorter.printTime(VECTOR, getTime() - start);
 
-        // DEQUE sorting
         start = getTime();
         deque_t sortedDeque = sorter.mergeInsertionSortDeque(sorter.getDeque());
         sorter.setDeque(sortedDeque);
@@ -35,7 +42,7 @@ int main(int argc, char **argv)
     }
     catch (std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << FRED(e.what()) << std::endl;
         return 1;
     }
 

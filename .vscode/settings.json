@@ -79,6 +79,10 @@
         "queue": "cpp",
         "ratio": "cpp",
         "sstream": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "text_encoding": "cpp",
+        "variant": "cpp"
     }
 }

@@ -3,141 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olly <olly@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/07 17:33:32 by okapshai         ###   ########.fr       */
+/*   Created: 2025/04/11 14:01:28 by olly              #+#    #+#             */
+/*   Updated: 2025/04/11 14:41:31 by olly             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe() {}
-PmergeMe::PmergeMe(PmergeMe const &src) : _vector(src._vector), _deque(src._deque) {}
-PmergeMe::~PmergeMe() {}
+PmergeMe::PmergeMe( PmergeMe const & other ) : _vector(other._vector), _deque(other._deque) {}
 
 PmergeMe & PmergeMe::operator=( PmergeMe const & other ) {
-
-    this->_deque = other._deque;
-    this->_vector = other._vector;
-    return (*this);
-}
-
-void PmergeMe::setDeque( deque_t deque ) { this->_deque = deque; }
-
-void PmergeMe::setVector( vector_t vector ) { this->_vector = vector; }
-
-deque_t const &	PmergeMe::getDeque( void ) const { return (this->_deque); }
-
-vector_t const & PmergeMe::getVector( void ) const { return (this->_vector); }
-
-
-// -------------------------------------------------------------------- Methods
-
-
-void PmergeMe::checkInput( int argc, char **argv ) {
-
-	for (int i = 1; i < argc; i++) {
-
-		std::string input = argv[i];
-		for (int j = 0; j < (int)input.size(); j++) {
-			if (isdigit(input[j]) == 0)
-				throw(WrongInputException());
-		}
-
-		double dbl = atof(argv[i]); // Converts to double (atof) and ensures it's in range (0 <= num <= INT_MAX).
-		if (dbl < 0 || dbl > __INT_MAX__)
-			throw(WrongInputException());
-	}
-}
-
-void PmergeMe::fillDeque(int argc, char **argv) {
-
-	for (int i = 1; i < argc; i++)
-		this->_deque.push_back(atoi(argv[i]));
-}
-
-void PmergeMe::fillVector(int argc, char **argv) {
-
-	for (int i = 1; i < argc; i++)
-		this->_vector.push_back(atoi(argv[i]));
-}
-
-void PmergeMe::printBefore(void) {
-
-	std::cout << "\n" << "Before: ";
-
-	for (int i = 0; i < (int)this->_vector.size(); i++)
-		std::cout << this->_vector[i] << " ";
-
-	std::cout << std::endl;
-}
-
-void PmergeMe::printAfter(void) {
-
-	std::cout << "\n" << "After: ";
-
-	for (int i = 0; i < (int)this->_vector.size(); i++)
-		std::cout << this->_vector[i] << " ";
-
-	std::cout << std::endl;
-}
-
-// Divide: Splits the array into two halves (cutAndSort()).
-deque_t	PmergeMe::cutAndSort(deque_t deque) {
-
-    //Initialization of two empty deque_t objects, dequeOne and dequeTwo:
-    //These are used to hold the two halves of the original deque.
-	deque_t	dequeOne;
-	deque_t	dequeTwo;
-
-    //Base Case Check: If the size of the input deque is less than 2,
-    //the function returns the deque as is, because a deque of size 0 or 1 is already "sorted."
-	if (deque.size() < 2)
-		return (deque);
-
-    //The first loop iterates from the start of the deque up to (but not including)
-    //the halfway point, pushing each element into dequeOne.
-	for (int i = 0; i < (int)(deque.size() / 2); i++)
-		dequeOne.push_back(deque[i]);
-
-    //The second loop starts from the halfway point to the end of the deque, pushing each element into dequeTwo.
-	for (int i = (int)(deque.size() / 2); i < (int)deque.size(); i++)
-		dequeTwo.push_back(deque[i]);
-
-    //Recursive Calls: Both dequeOne and dequeTwo are then passed to recursive calls of cutAndSort,
-    //which continues to split and sort each half until the base case is reached.
-	dequeOne = cutAndSort(dequeOne);
-	dequeTwo = cutAndSort(dequeTwo);
-
-    //Merging: Once the base case is reached for all recursive calls,
-    //the mergeSort function is used to merge dequeOne and dequeTwo back together in a sorted manner.
-    //This step is crucial and where the actual sorting happens.
-    //Each level of recursion will merge its two halves in a sorted order,
-    //building up to the final, sorted deque.
-
-    //Return Statement: The function returns the result of the mergeSort call,
-    //which should be the sorted version of the original input deque.
-	return (mergeSort(dequeOne,dequeTwo));
-}
-
-vector_t PmergeMe::cutAndSort(vector_t vector)
-{
     if (this != &other)
     {
         this->_vector = other._vector;
         this->_deque = other._deque;
     }
-    return *this;
+    return (*this);
 }
 
-void PmergeMe::checkInput(int argc, char **argv)
-{
-    for (int i = 1; i < argc; ++i)
-    {
+void PmergeMe::setVector( vector_t vector ) { _vector = vector;}
+void PmergeMe::setDeque( deque_t deque ) { _deque = deque;}
+const vector_t & PmergeMe::getVector( void ) const { return _vector; }
+const deque_t & PmergeMe::getDeque( void ) const { return _deque; }
+
+PmergeMe::~PmergeMe() {}
+
+//-------------------------------------------------------------------Methods
+
+void PmergeMe::checkInput( int argc, char **argv ) {
+    for (int i = 1; i < argc; ++i) {
         std::string input = argv[i];
-        for (size_t j = 0; j < input.length(); ++j)
-        {
+        for (size_t j = 0; j < input.length(); ++j){
             if (!isdigit(input[j]))
                 throw WrongInputException();
         }
@@ -147,85 +46,121 @@ void PmergeMe::checkInput(int argc, char **argv)
     }
 }
 
-void PmergeMe::fillVector(int argc, char **argv)
-{
-    std::cout << "DEBUG: Filling vector with values:"; 
-    for (int i = 1; i < argc; ++i) {
-        int val = atoi(argv[i]);
-        std::cout << " " << val; 
-        _vector.push_back(val);
-    }
-    std::cout << std::endl;
+void PmergeMe::fillVector( int argc, char **argv ) {
+    for (int i = 1; i < argc; ++i)
+        _vector.push_back(atoi(argv[i]));
 }
 
-
-void PmergeMe::fillDeque(int argc, char **argv)
-{
+void PmergeMe::fillDeque( int argc, char **argv ) {
     for (int i = 1; i < argc; ++i)
         _deque.push_back(atoi(argv[i]));
 }
 
-void PmergeMe::printBefore(void)
-{
-    std::cout << "\nBefore: ";
+void PmergeMe::printBefore( void ) {
+    std::cout << FYEL("\nBefore: ");
     for (size_t i = 0; i < _vector.size(); ++i)
         std::cout << _vector[i] << " ";
     std::cout << std::endl;
 }
 
-void PmergeMe::printAfter(void)
-{
-   
-    std::cout << "\nAfter: ";
+void PmergeMe::printAfter( void ) {
+    std::cout << FYEL("\nAfter: ");
     for (size_t i = 0; i < _vector.size(); ++i)
         std::cout << _vector[i] << " ";
     std::cout << std::endl;
 }
 
-void PmergeMe::printTime(int containerType, double time)
-{
+void PmergeMe::printTime( int containerType, double time ) {
     std::string container = (containerType == VECTOR) ? "vector" : "deque";
-    std::cout << "\nTime to process elements with std::" << container
+    std::cout << FYEL("\nTime to process elements with std::") << FYEL(container)
               << " : " << std::fixed << std::setprecision(4)
               << time << "ms." << std::endl;
 }
 
-void PmergeMe::setVector(vector_t vector)
-{
-    _vector = vector;
-}
-
-void PmergeMe::setDeque(deque_t deque)
-{
-    _deque = deque;
-}
-
-const vector_t &PmergeMe::getVector(void) const { return _vector; }
-const deque_t &PmergeMe::getDeque(void) const { return _deque; }
-
-vector_t PmergeMe::mergeInsertionSortVector(vector_t input)
-{
-    std::cout << "DEBUG: mergeInsertionSortVector called with input size = " << input.size() << std::endl; // ←
-    vector_t sorted;
-    for (size_t i = 0; i < input.size(); ++i)
-        binaryInsertVector(sorted, input[i]);
-    std::cout << "DEBUG: Sorted size = " << sorted.size() << std::endl;
-    return sorted;
-}
-
-
-
-void PmergeMe::binaryInsertVector(vector_t sorted, int value)
-{
-    if (sorted.empty())
-    {
-        sorted.push_back(value);
-        return;
+vector_t PmergeMe::mergeInsertionSortVector(vector_t input) {
+    if (input.size() <= 1)
+        return input;
+        
+    // Handle odd size input case
+    int straggler = -1;
+    if (input.size() % 2 != 0) {
+        straggler = input.back();
+        input.pop_back();
     }
+    
+    // Step 1: Create pairs and sort them
+    std::vector<std::pair<int, int> > pairs;
+    for (size_t i = 0; i < input.size(); i += 2) {
+        if (input[i] > input[i + 1])
+            pairs.push_back(std::make_pair(input[i], input[i + 1]));
+        else
+            pairs.push_back(std::make_pair(input[i + 1], input[i]));
+    }
+    
+    // Step 2: Extract the larger elements
+    vector_t largerElements;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        largerElements.push_back(pairs[i].first);
+    
+    // Step 3: Recursively sort the larger elements
+    largerElements = mergeInsertionSortVector(largerElements);
+    
+    // Step 4: Create the sorted main chain with large elements
+    vector_t result;
+    for (size_t i = 0; i < largerElements.size(); ++i)
+        result.push_back(largerElements[i]);
+        
+    // Step 5: Insert smaller elements using binary insertion
+    for (size_t i = 0; i < pairs.size(); ++i) {
+        // Find the index of the larger element in the result
+        size_t idx = 0;
+        while (idx < result.size() && result[idx] != pairs[i].first)
+            idx++;
+            
+        // Insert the smaller element using binary insertion
+        if (idx < result.size()) {
+            // Binary insert the smaller element
+            size_t insertPos = 0;
+            size_t low = 0;
+            size_t high = result.size();
+            
+            // Find insertion point
+            while (low < high) {
+                size_t mid = (low + high) / 2;
+                if (pairs[i].second < result[mid])
+                    high = mid;
+                else
+                    low = mid + 1;
+            }
+            insertPos = low;
+            
+            // Insert at the found position
+            result.insert(result.begin() + insertPos, pairs[i].second);
+        }
+    }
+    
+    // Insert the straggler if it exists
+    if (straggler != -1) {
+        // Find insertion position
+        size_t low = 0;
+        size_t high = result.size();
+        while (low < high) {
+            size_t mid = (low + high) / 2;
+            if (straggler < result[mid])
+                high = mid;
+            else
+                low = mid + 1;
+        }
+        result.insert(result.begin() + low, straggler);
+    }
+        
+    return result;
+}
 
-    size_t low = 0, high = sorted.size();
-    while (low < high)
-    {
+void PmergeMe::binaryInsertVector(vector_t &sorted, int value) {
+    size_t low = 0;
+    size_t high = sorted.size();
+    while (low < high) {
         size_t mid = (low + high) / 2;
         if (value < sorted[mid])
             high = mid;
@@ -235,21 +170,90 @@ void PmergeMe::binaryInsertVector(vector_t sorted, int value)
     sorted.insert(sorted.begin() + low, value);
 }
 
-
-
-deque_t PmergeMe::mergeInsertionSortDeque(deque_t input)
-{
-    deque_t sorted;
-    for (size_t i = 0; i < input.size(); ++i)
-        binaryInsertDeque(sorted, input[i]);
-    return sorted;
+deque_t PmergeMe::mergeInsertionSortDeque(deque_t input) {
+    if (input.size() <= 1)
+        return input;
+        
+    // Handle odd size input case
+    int straggler = -1;
+    if (input.size() % 2 != 0) {
+        straggler = input.back();
+        input.pop_back();
+    }
+    
+    // Step 1: Create pairs and sort them
+    std::vector<std::pair<int, int> > pairs;
+    for (size_t i = 0; i < input.size(); i += 2) {
+        if (input[i] > input[i + 1])
+            pairs.push_back(std::make_pair(input[i], input[i + 1]));
+        else
+            pairs.push_back(std::make_pair(input[i + 1], input[i]));
+    }
+    
+    // Step 2: Extract the larger elements
+    deque_t largerElements;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        largerElements.push_back(pairs[i].first);
+    
+    // Step 3: Recursively sort the larger elements
+    largerElements = mergeInsertionSortDeque(largerElements);
+    
+    // Step 4: Create the sorted main chain with large elements
+    deque_t result;
+    for (size_t i = 0; i < largerElements.size(); ++i)
+        result.push_back(largerElements[i]);
+        
+    // Step 5: Insert smaller elements using binary insertion
+    for (size_t i = 0; i < pairs.size(); ++i) {
+        // Find the index of the larger element in the result
+        size_t idx = 0;
+        while (idx < result.size() && result[idx] != pairs[i].first)
+            idx++;
+            
+        // Insert the smaller element using binary insertion
+        if (idx < result.size()) {
+            // Binary insert the smaller element
+            size_t insertPos = 0;
+            size_t low = 0;
+            size_t high = result.size();
+            
+            // Find insertion point
+            while (low < high) {
+                size_t mid = (low + high) / 2;
+                if (pairs[i].second < result[mid])
+                    high = mid;
+                else
+                    low = mid + 1;
+            }
+            insertPos = low;
+            
+            // Insert at the found position
+            result.insert(result.begin() + insertPos, pairs[i].second);
+        }
+    }
+    
+    // Insert the straggler if it exists
+    if (straggler != -1) {
+        // Find insertion position
+        size_t low = 0;
+        size_t high = result.size();
+        while (low < high) {
+            size_t mid = (low + high) / 2;
+            if (straggler < result[mid])
+                high = mid;
+            else
+                low = mid + 1;
+        }
+        result.insert(result.begin() + low, straggler);
+    }
+        
+    return result;
 }
 
-void PmergeMe::binaryInsertDeque(deque_t sorted, int value)
-{
-    size_t low = 0, high = sorted.size();
-    while (low < high)
-    {
+void PmergeMe::binaryInsertDeque(deque_t &sorted, int value) {
+    size_t low = 0;
+    size_t high = sorted.size();
+    while (low < high) {
         size_t mid = (low + high) / 2;
         if (value < sorted[mid])
             high = mid;
@@ -259,8 +263,7 @@ void PmergeMe::binaryInsertDeque(deque_t sorted, int value)
     sorted.insert(sorted.begin() + low, value);
 }
 
-double getTime(void)
-{
+double getTime(void) {
     struct timeval tv;
     if (gettimeofday(&tv, NULL) == -1)
         throw ErrorTimeException();
