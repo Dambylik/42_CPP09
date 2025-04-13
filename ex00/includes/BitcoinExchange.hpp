@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/31 17:50:31 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/13 11:15:18 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class BitcoinExchange {
 	
 		BitcoinExchange();
 		BitcoinExchange( BitcoinExchange const & other ) ;
-		BitcoinExchange& operator=( BitcoinExchange const & other );
+		BitcoinExchange & operator=( BitcoinExchange const & other );
 		~BitcoinExchange();
 		
 		void 							loadDatabase();
@@ -43,5 +43,3 @@ class BitcoinExchange {
 	
 		std::map<std::string, double> 	_csvDatabase;
 };
-
-std::ostream & operator<<(std::ostream & lhs, BitcoinExchange const & rhs);

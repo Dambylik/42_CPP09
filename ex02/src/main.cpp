@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olly <olly@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:39:50 by olly              #+#    #+#             */
-/*   Updated: 2025/04/11 13:02:26 by olly             ###   ########.fr       */
+/*   Updated: 2025/04/13 12:18:52 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int main(int argc, char **argv)
 
     PmergeMe sorter;
 
-    try
-    {
+    try {
         sorter.checkInput(argc, argv);
         sorter.fillVector(argc, argv);
         sorter.fillDeque(argc, argv);
@@ -39,12 +38,10 @@ int main(int argc, char **argv)
         deque_t sortedDeque = sorter.mergeInsertionSortDeque(sorter.getDeque());
         sorter.setDeque(sortedDeque);
         sorter.printTime(DEQUE, getTime() - start);
+        return (0);
     }
-    catch (std::exception &e)
-    {
-        std::cerr << FRED(e.what()) << std::endl;
-        return 1;
+    catch (std::exception & e) {
+        std::cerr << FRED(e.what()) << std::endl;  
     }
-
-    return 0;
+    return (1);    
 }

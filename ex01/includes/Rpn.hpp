@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/03 14:48:26 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/13 11:48:30 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 // The main advantage of RPN is that it does not require parentheses. 
 // The order of operations is determined only by the position of the operands and operators.
 
-class RPN
-{
+class RPN {
+	
 	public:
 
 		RPN();
 		RPN( RPN const & other) ;
-		RPN & operator=(RPN const & other);
+		RPN & operator=( RPN const & other );
 		~RPN();
 
-		int const & 	getResult(void) const;
+		int const & 	getResult( void ) const;
 
 		void 			performCalculation( char oper, int firstNB, int secondNb );
 		bool 			isOperator( char c );

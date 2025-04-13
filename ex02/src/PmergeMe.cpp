@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olly <olly@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 14:01:28 by olly              #+#    #+#             */
-/*   Updated: 2025/04/11 14:41:31 by olly             ###   ########.fr       */
+/*   Updated: 2025/04/13 12:22:21 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ PmergeMe::PmergeMe() {}
 PmergeMe::PmergeMe( PmergeMe const & other ) : _vector(other._vector), _deque(other._deque) {}
 
 PmergeMe & PmergeMe::operator=( PmergeMe const & other ) {
-    if (this != &other)
-    {
+    if (this != &other) {
         this->_vector = other._vector;
         this->_deque = other._deque;
     }

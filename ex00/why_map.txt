@@ -1,0 +1,16 @@
+Using std::map for this Bitcoin exchange exercise is a very deliberate and appropriate choice:
+
+Key-value pairing: The exercise needs to associate dates (keys) with Bitcoin values (values), which is exactly what maps are designed for
+
+Automatic sorting: std::map keeps its elements sorted by key (dates in this case), which provides two critical advantages:
+
+Easy lookups for exact date matches (O(log n) complexity)
+The findClosestDate function can efficiently find the nearest date in the database when an exact match isn't found
+Iterator capabilities: As shown in your findClosestDate function, maps provide bidirectional iterators that let you navigate through dates in order, which is essential for finding the closest date
+
+Alternative containers would be less suitable:
+
+std::unordered_map wouldn't maintain sorted order, making "closest date" lookups inefficient
+std::vector of pairs would require manual sorting and binary search implementation
+std::set wouldn't allow the direct key-value association needed
+The implementation specifically uses string dates as keys rather than a date type, which works because lexicographical string comparison of properly formatted dates (YYYY-MM-DD) produces the correct chronological ordering.

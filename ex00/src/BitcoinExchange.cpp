@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:18:04 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/31 17:49:44 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/13 11:43:48 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ std::string BitcoinExchange::toString( int number ) const {
 
 //-------------------------------------------------------------------findClosestDate
 
+// Returns a const_iterator to a map element - this is an iterator that points to a specific entry in the map but doesn't allow modifying the data
 std::map<std::string, double>::const_iterator BitcoinExchange::findClosestDate( std::string const & date ) const {
 
     std::map<std::string, double>::const_iterator it = _csvDatabase.lower_bound(date);
@@ -189,10 +190,8 @@ std::string BitcoinExchange::trim( const std::string & str ) const {
 double BitcoinExchange::stringToDouble( std::string const & str ) const {
 
     if (str.find_first_not_of("0123456789.-") != std::string::npos) {
-        std::cerr << BOLDRED << "Error: Value is not a valid number => " << str << RESET << std::endl;
         return (-2);
     }
-
     char* endptr;
     double value = strtod(str.c_str(), &endptr);
     
@@ -232,9 +231,7 @@ bool BitcoinExchange::isValidDate( std::string const & date ) const {
 bool BitcoinExchange::isValidValue( std::string const & value ) const {
 
     double val = stringToDouble(value);
-    if (val == -2) {
-        return (false);
-    }
+    
     if (val < 0) {
         std::cerr << BOLDRED << "Error: not a positive number." << RESET << std::endl;
         return (false);
