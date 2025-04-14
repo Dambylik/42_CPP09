@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 19:09:31 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/31 15:09:24 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:59:51 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int main( int argc, char **argv ) {
     try {
         coin.loadDatabase();
         coin.processInputFile(argv[1]);
+        return (0);
     } 
     catch (const std::exception & e) {
         std::cerr << BOLDRED << e.what() << RESET << std::endl;
-        return (1);
     }
-    return (0);
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:18:04 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/13 11:43:48 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:49:30 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ BitcoinExchange& BitcoinExchange::operator=( BitcoinExchange const & other ) {
 BitcoinExchange::~BitcoinExchange() {}
 
 
-//-------------------------------------------------------------------loadDatabase
+//-------------------------------------------------------------------Methods
 
 void BitcoinExchange::loadDatabase() {
 
@@ -73,8 +73,6 @@ void BitcoinExchange::loadDatabase() {
     }
 }
 
-//-------------------------------------------------------------------processInputFile
-
 void BitcoinExchange::processInputFile( std::string const & filename ) {
 
     std::ifstream file(filename.c_str());
@@ -101,8 +99,6 @@ void BitcoinExchange::processInputFile( std::string const & filename ) {
         }
     }
 }
-
-//-------------------------------------------------------------------processLine
 
 void BitcoinExchange::processLine(std::string const & line) {
     
@@ -138,10 +134,8 @@ void BitcoinExchange::processLine(std::string const & line) {
     }
 
     double result = value * rateIt->second;
-    std::cout << date << " => " << value << " = " << result << std::endl; // std::setprecision(2) if needed 
+    std::cout << date << " => " << value << " = " << result << std::endl;
 }
-
-//-------------------------------------------------------------------toString
 
 std::string BitcoinExchange::toString( int number ) const {
     
@@ -150,9 +144,7 @@ std::string BitcoinExchange::toString( int number ) const {
     return ss.str();
 }
 
-//-------------------------------------------------------------------findClosestDate
 
-// Returns a const_iterator to a map element - this is an iterator that points to a specific entry in the map but doesn't allow modifying the data
 std::map<std::string, double>::const_iterator BitcoinExchange::findClosestDate( std::string const & date ) const {
 
     std::map<std::string, double>::const_iterator it = _csvDatabase.lower_bound(date);
@@ -171,8 +163,6 @@ std::map<std::string, double>::const_iterator BitcoinExchange::findClosestDate( 
     return (it);
 }
 
-//-------------------------------------------------------------------trim
-
 std::string BitcoinExchange::trim( const std::string & str ) const {
 
     size_t first = str.find_first_not_of(" \t");
@@ -184,8 +174,6 @@ std::string BitcoinExchange::trim( const std::string & str ) const {
         return (str.substr(first, (last - first + 1)));
     }
 }
-
-//-------------------------------------------------------------------stringToDouble
 
 double BitcoinExchange::stringToDouble( std::string const & str ) const {
 
@@ -201,8 +189,6 @@ double BitcoinExchange::stringToDouble( std::string const & str ) const {
     }
     return (value);
 }
-
-//-------------------------------------------------------------------isValidDate
 
 bool BitcoinExchange::isValidDate( std::string const & date ) const {
 
@@ -225,8 +211,6 @@ bool BitcoinExchange::isValidDate( std::string const & date ) const {
     }
     return (true);
 }
-
-//-------------------------------------------------------------------isValidValue
 
 bool BitcoinExchange::isValidValue( std::string const & value ) const {
 

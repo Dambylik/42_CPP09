@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/13 11:48:30 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:57:11 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 #include <iostream>
 #include <string>
 #include <stack>
-
-// RPN is a mathematical notation where operators follow their operands. Instead of writing:
-// Infix Notation (standard math):3 + 4
-// RPN Notation:3 4 +
-// The main advantage of RPN is that it does not require parentheses. 
-// The order of operations is determined only by the position of the operands and operators.
 
 class RPN {
 	

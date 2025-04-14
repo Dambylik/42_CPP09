@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:39:50 by olly              #+#    #+#             */
-/*   Updated: 2025/04/13 12:18:52 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:59:38 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int main(int argc, char **argv)
 {
-    if (argc < 2)
-    {
+    if (argc < 2) {
         std::cerr << "Usage: ./PmergeMe <sequence of positive integers>" << std::endl;
         return (1);
     }

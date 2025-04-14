@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:34 by okapshai          #+#    #+#             */
-/*   Updated: 2025/03/28 12:57:26 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:33:25 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class ErrorTimeException : public std::exception
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("an error occured using gettimeoftheday()");
+			return ("Error: an error occured using gettimeoftheday()");
 		}
 };
 
@@ -27,6 +27,6 @@ class WrongInputException : public std::exception
 {
 	public:
 		virtual const char* what() const throw() {
-			return ("please enter unsigned ints only");
+			return ("Error: please enter unsigned ints only");
 		}
 };

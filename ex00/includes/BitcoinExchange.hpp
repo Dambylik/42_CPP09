@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:51:02 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/13 11:15:18 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:38:30 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ class BitcoinExchange {
 		double 							stringToDouble( std::string const & str ) 		const;
 		std::string 					toString( int number ) 							const;
 		
-		std::map<std::string, double>::const_iterator findClosestDate(const std::string& date) const;
+		std::map<std::string, double>::const_iterator findClosestDate(const std::string & date) const;
 
 	private:
 	

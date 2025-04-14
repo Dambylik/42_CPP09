@@ -6,7 +6,7 @@
 /*   By: okapshai <okapshai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 16:52:29 by okapshai          #+#    #+#             */
-/*   Updated: 2025/04/03 14:47:34 by okapshai         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:05:10 by okapshai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,43 +65,41 @@ void RPN::calculateRpn( std::string input ) {
 		while (input[i] && input[i] == ' ')
 			i++;
 
-		if (isdigit(input[i]) != 0) { // if = 0 -> not a digit, if = 1 -> digit
+		if (isdigit(input[i]) != 0) {
 			int nb = input[i] - '0';
 			this->_stack.push(nb);
 		}
 		
 		else if (isOperator(input[i]) == true) {
-			if (this->_stack.size() < 2) // Checks if there are at least two numbers on the stack
+			if (this->_stack.size() < 2)
 				throw (NotEnoughNumbersException());
 
-            int secondNb = this->_stack.top(); // //It then pops the top two numbers from the stack
+            int secondNb = this->_stack.top();
 			this->_stack.pop();
 
 			int firstNb = this->_stack.top();
 			this->_stack.pop();
 
 			performCalculation(input[i], firstNb, secondNb);
-			//Final result: After processing all characters in the input string, the final result of the expression
-    		//is expected to be the only number left on the stack.
 		}
 	}
-	this->_result = this->_stack.top(); //The function assigns this number to _result and then pops it from the stack.
+	this->_result = this->_stack.top();
 	this->_stack.pop();
 	
-	if (this->_stack.size() != 0)  //check if the stack is not empty,
+	if (this->_stack.size() != 0)
 		throw TooMuchNumbersException();
 }
 
 void RPN::processInput( std::string input ) {
 
-	for (int i = 0; i < (int)input.size(); i++) { // Prevents "3 4 a +"
+	for (int i = 0; i < (int)input.size(); i++) {
 		if (isdigit(input[i]) == 0 && isOperator(input[i]) == false && input[i] != ' ')
 			throw(WrongInputException());
 
-		if (isdigit(input[i]) != 0 && input[i + 1] && input[i + 1] != ' ') // Prevents "34 +" (should be "3 4 +").
+		if (isdigit(input[i]) != 0 && input[i + 1] && input[i + 1] != ' ')
 			throw(WrongInputException());
 
-		if (isOperator(input[i]) && input[i + 1] && input[i + 1] != ' ') // //Prevents "3 4+ " (should be "3 4 +").
+		if (isOperator(input[i]) && input[i + 1] && input[i + 1] != ' ')
 			throw(WrongInputException());
 	}
 }
